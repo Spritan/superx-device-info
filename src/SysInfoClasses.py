@@ -40,8 +40,6 @@ class ThisSysCPU:
         self.max_frequency =f"{_cpufreq.max:.2f}Mhz"
         self.min_frequency =f"{_cpufreq.min:.2f}Mhz"
         self.current_frequency =f"{_cpufreq.current:.2f}Mhz"
-x = ThisSysCPU()
-print(x.processor_name)
       
 class ThisSysMem:
     def __init__(self):
