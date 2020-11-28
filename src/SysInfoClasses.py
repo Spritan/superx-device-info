@@ -1,6 +1,7 @@
 import platform
 import psutil
 import GPUtil
+import cpuinfo
 from datetime import datetime
 
 
@@ -21,17 +22,16 @@ class ThisSysSys:
         _uname = platform.uname()
         _boot_time_timestamp = psutil.boot_time()
         _bt = datetime.fromtimestamp(_boot_time_timestamp)
-        self.system = f"{_uname.system}"
-        self.node = f"{_uname.node}"
-        self.release =f"{_uname.release}"
-        self.version =f"{_uname.version}"
-        self.machine =f"{_uname.machine}"
-        self.processor =f"{_uname.processor}"
+        self.system = f"{_uname.system}"    # type of os Linux
+        self.node = f"{_uname.node}"        # Pc name
+        self.release =f"{_uname.release}"   # kernal
+        self.version =f"{_uname.version}"   # os name version
+        self.machine =f"{_uname.machine}"   # machine archicture
         self.boot_time =f"{_bt.year}/{_bt.month}/{_bt.day} {_bt.hour}:{_bt.minute}:{_bt.second}"
-
 
 class ThisSysCPU:
     def __init__(self):
+        self.processor_name = cpuinfo.get_cpu_info()['brand']
         # number of cores
         self.physical_cores = psutil.cpu_count(logical=False)
         self.total_cores = psutil.cpu_count(logical=True)
@@ -40,7 +40,9 @@ class ThisSysCPU:
         self.max_frequency =f"{_cpufreq.max:.2f}Mhz"
         self.min_frequency =f"{_cpufreq.min:.2f}Mhz"
         self.current_frequency =f"{_cpufreq.current:.2f}Mhz"
-        
+x = ThisSysCPU()
+print(x.processor_name)
+      
 class ThisSysMem:
     def __init__(self):
         # get the memory details
